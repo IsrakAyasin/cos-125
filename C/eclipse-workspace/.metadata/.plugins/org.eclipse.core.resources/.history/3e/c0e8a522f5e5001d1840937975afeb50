@@ -1,0 +1,121 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class MorseCodeTree {
+	private TreeNode<String> root;
+
+    public MorseTree() {
+        root = new TreeNode(' ');
+    }
+
+    public void buildTreeFromFile(String filePath) {
+        try {
+            File file = new File(filePath);
+            Scanner scanner = new Scanner(file);
+            
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                char letter = line.charAt(0);
+                String code = line.substring(1);
+
+                TreeNode currentNode = root;
+                for (int i = 0; i < code.length(); i++) {
+                    if (code.charAt(i) == 'o') {
+                        if (currentNode.left == null) {
+                            currentNode.left = new TreeNode(' ');
+                        }
+                        currentNode = currentNode.left;
+                    } else if (code.charAt(i) == '-') {
+                        if (currentNode.right == null) {
+                            currentNode.right = new TreeNode(' ');
+                        }
+                        currentNode = currentNode.right;
+                    }
+                }
+                currentNode.data = letter;
+            }
+            
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void preOrderTraversal(TreeNode node, StringBuilder result) {
+        if (node != null) {
+            result.append(node.data).append(" ");
+            preOrderTraversal(node.left, result);
+            preOrderTraversal(node.right, result);
+        }
+    }
+
+    public String preOrder() {
+        StringBuilder result = new StringBuilder();
+        preOrderTraversal(root, result);
+        return result.toString().trim();
+    }
+
+    private void postOrderTraversal(TreeNode node, StringBuilder result) {
+        if (node != null) {
+            postOrderTraversal(node.left, result);
+            postOrderTraversal(node.right, result);
+            result.append(node.data).append(" ");
+        }
+    }
+
+    public String postOrder() {
+        StringBuilder result = new StringBuilder();
+        postOrderTraversal(root, result);
+        return result.toString().trim();
+    }
+
+    public String toMorseCode(String englishText) {
+        StringBuilder result = new StringBuilder();
+        for (char c : englishText.toLowerCase().toCharArray()) {
+            if (Character.isAlphabetic(c)) {
+                String morseCode = findMorseCode(root, c);
+                if (!morseCode.isEmpty()) {
+                    result.append(morseCode).append("|");
+                }
+            }
+        }
+        return result.toString().replaceAll("\\|$", "");
+    }
+
+    public String toEnglish(String morseCode) {
+        StringBuilder result = new StringBuilder();
+        String[] codes = morseCode.split("\\|");
+        for (String code : codes) {
+            if (!code.isEmpty()) {
+                char englishChar = findEnglishChar(root, code);
+                if (englishChar != ' ') {
+                    result.append(englishChar);
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    private String findMorseCode(TreeNode node, char c) {
+        if (node != null) {
+            if (node.data == c) {
+                return "";
+            }
+
+            String leftResult = findMorseCode(node.left, c);
+            if (!leftResult.isEmpty()) {
+                return "o" + leftResult;
+            }
+
+            String rightResult = findMorseCode(node.right, c);
+            if (!rightResult.isEmpty()) {
+                return "-" + rightResult;
+            }
+        }
+        return "";
+    }
+    
+    
+    
+}

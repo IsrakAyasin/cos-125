@@ -1,0 +1,12 @@
+public class library {
+	String name="random shit";
+	
+	public library(String name){
+		this.name=name;
+	}
+	
+	public String toString() {
+		return("yeah"+name);
+	}
+
+}

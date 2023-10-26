@@ -1,0 +1,15 @@
+Berlin;Germany;3677472
+Madrid;Spain;3305408
+Rome;Italy;2761632
+Bucharest;Romania;2161347
+Paris;France;2139907
+Vienna;Austria;1962779
+Warsaw;Poland;1863056
+Hamburg;Germany;1853935
+Budapest;Hungary;1706851
+Barcelona;Spain;1636732
+Munich;Germany;1487708
+Milan;Italy;1371498
+Sofia;Bulgaria;1307439
+Prague;Czech Republic;1275406
+Cologne;Germany;1073096

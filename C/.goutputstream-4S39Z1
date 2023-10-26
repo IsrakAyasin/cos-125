@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main(){
+
+	printf("Contry      Region      Population (M)\n--------------------------------------\nUSA         America     %hu\nJapan       Asia        %hu\nFrance      Europe      %hu\nGhana       Africa      %hu\n",332,126,68,33);
+	
+	
+char chr = 78;
+printf("Character having ASCII value 78 is %hd.\n", chr);
+
+
+int i_number = 12;
+float f_number = 3.125;
+double d_number = 7.5345345;
+char character = 'T';
+char text[] = "COS 135";
+printf("i_number - %hd.\nf_number - %f.\nd_number - %f.\ncharacter - %c\ntext - %s",i_number,f_number,d_number,character,text);
+
+return 0;
+}

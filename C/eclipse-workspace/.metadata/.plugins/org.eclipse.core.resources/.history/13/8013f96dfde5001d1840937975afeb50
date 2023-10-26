@@ -1,0 +1,253 @@
+package trees;
+
+public class MorseCodeTree {
+    public TreeNode<String> root;
+
+    public MorseCodeTree() {
+        this.root = new TreeNode<String>("");
+        this.insert("E", "o");
+        this.insert("T", "-");
+        this.insert("I", "oo");
+        this.insert("A", "o-");
+        this.insert("N", "-o");
+        this.insert("M", "--");
+        this.insert("S", "ooo");
+        this.insert("U", "oo-");
+        this.insert("R", "o-o");
+        this.insert("W", "o--");
+        this.insert("D", "-oo");
+        this.insert("K", "-o-");
+        this.insert("G", "--o");
+        this.insert("O", "---");
+        this.insert("H", "oooo");
+        this.insert("V", "ooo-");
+        this.insert("F", "oo-");
+        this.insert("L", "o--");
+        this.insert("P", "o--o");
+        this.insert("J", "o---");
+        this.insert("B", "-ooo");
+        this.insert("X", "-oo-");
+        this.insert("C", "-o-");
+        this.insert("Y", "-o--");
+        this.insert("Z", "--oo");
+        this.insert("Q", "--o-");
+    }
+
+    public void insert(String letter, String code) {
+        letter = letter.toUpperCase();
+        TreeNode<String> currentNode = this.root;
+        for (char symbol : code.toCharArray()) {
+            if (symbol == 'o') {
+                if (currentNode.getLeft() == null) {
+                    currentNode.insertLeft("");
+                }
+                currentNode = currentNode.getLeft();
+            } else if (symbol == '-') {
+                if (currentNode.getRight() == null) {
+                    currentNode.insertRight("");
+                }
+                currentNode = currentNode.getRight();
+            }
+        }
+        currentNode.setElement(letter);
+    }
+
+
+    public String preOrder() {
+        return root.preorder();
+    }
+
+    public String postOrder() {
+        return root.postorder();
+    }
+
+    public String englishToMorse(String word) {
+        StringBuilder morse = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if (c != ' ') {
+                switch (Character.toUpperCase(c)) {
+                    case 'A':
+                        morse.append("o- ");
+                        break;
+                    case 'B':
+                        morse.append("-ooo ");
+                        break;
+                    case 'C':
+                        morse.append("-o-o ");
+                        break;
+                    case 'D':
+                        morse.append("-oo ");
+                        break;
+                    case 'E':
+                        morse.append("o ");
+                        break;
+                    case 'F':
+                        morse.append("oo-o ");
+                        break;
+                    case 'G':
+                        morse.append("--o ");
+                        break;
+                    case 'H':
+                        morse.append("oooo ");
+                        break;
+                    case 'I':
+                        morse.append("oo ");
+                        break;
+                    case 'J':
+                        morse.append("o--- ");
+                        break;
+                    case 'K':
+                        morse.append("-o- ");
+                        break;
+                    case 'L':
+                        morse.append("o-oo ");
+                        break;
+                    case 'M':
+                        morse.append("-- ");
+                        break;
+                    case 'N':
+                        morse.append("-o ");
+                        break;
+                    case 'O':
+                        morse.append("--- ");
+                        break;
+                    case 'P':
+                        morse.append("o--o ");
+                        break;
+                    case 'Q':
+                        morse.append("--o- ");
+                        break;
+                    case 'R':
+                        morse.append("o-o ");
+                        break;
+                    case 'S':
+                        morse.append("ooo ");
+                        break;
+                    case 'T':
+                        morse.append("- ");
+                        break;
+                    case 'U':
+                        morse.append("oo- ");
+                        break;
+                    case 'V':
+                        morse.append("ooo- ");
+                        break;
+                    case 'W':
+                        morse.append("o-- ");
+                        break;
+                    case 'X':
+                        morse.append("-oo- ");
+                        break;
+                    case 'Y':
+                        morse.append("-o-- ");
+                        break;
+                    case 'Z':
+                        morse.append("--oo ");
+                        break;
+                    default:
+                        System.out.println("Could not find code for character: " + c);
+                        break;
+                }
+                morse.append("| ");
+            } 
+        }
+        return morse.toString();
+    }
+
+
+
+
+    public String morseToEnglish(String morse) {
+        StringBuilder english = new StringBuilder();
+        //splits so we and decode it 
+        String[] letter = morse.split("  ");
+        for (int i = 0; i < letter.length; i++) {
+            String[] letters = letter[i].split(" ");
+            for (int j = 0; j < letters.length; j++) {
+                switch (letters[j]) {
+                    case "o-":
+                        english.append("A");
+                        break;
+                    case "-ooo":
+                        english.append("B");
+                        break;
+                    case "-o-o":
+                        english.append("C");
+                        break;
+                    case "-oo":
+                        english.append("D");
+                        break;
+                    case "o":
+                        english.append("E");
+                        break;
+                    case "oo-o":
+                        english.append("F");
+                        break;
+                    case "--o":
+                        english.append("G");
+                        break;
+                    case "oooo":
+                        english.append("H");
+                        break;
+                    case "oo":
+                        english.append("I");
+                        break;
+                    case "o---":
+                        english.append("J");
+                        break;
+                    case "-o-":
+                        english.append("K");
+                        break;
+                    case "o-oo":
+                        english.append("L");
+                        break;
+                    case "--":
+                        english.append("M");
+                        break;
+                    case "-o":
+                        english.append("N");
+                        break;
+                    case "---":
+                        english.append("O");
+                        break;
+                    case "o--o":
+                        english.append("P");
+                        break;
+                    case "--o-":
+                        english.append("Q");
+                        break;
+                    case "o-o":
+                        english.append("R");
+                        break;
+                    case "ooo":
+                        english.append("S");
+                        break;
+                    case "-":
+                        english.append("T");
+                        break;
+                    case "oo-":
+                        english.append("U");
+                        break;
+                    case "ooo-":
+                        english.append("V");
+                        break;
+                    case "o--":
+                        english.append("W");
+                        break;
+                    case "-oo-":
+                        english.append("X");
+                        break;
+                    case "-o--":
+                        english.append("Y");
+                        break;
+                    case "--oo":
+                        english.append("Z");
+                        break;
+                }
+            }
+        
+        }
+        return english.toString();
+    }
+}

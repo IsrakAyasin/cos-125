@@ -1,0 +1,13 @@
+Patient maxCaffeine = null;
+        int maxIndex = -1;
+        for (int i = 0; i < patientManager.getPatients().length; i++) {
+            if (patientManager.getPatients()[i] != null &&
+                    (maxCaffeine == null || patientManager.getPatients()[i].getCaffeineLevel() > maxCaffeine.getCaffeineLevel())) {
+                maxCaffeine = patientManager.getPatients()[i];
+                maxIndex = i;
+            }
+        }
+        if (maxCaffeine != null) {
+            System.out.println("Removing " + maxCaffeine.toString());
+            patientManager.removePatient(maxIndex);
+        }

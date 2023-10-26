@@ -1,0 +1,10 @@
+alpha=5
+beta=alpha-1.25
+gamma=alpha%2
+delta=alpha**4
+epsilon=9/2
+print(alpha)
+print(beta)
+print(gamma)
+print(delta)
+print(epsilon)
